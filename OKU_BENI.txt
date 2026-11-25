@@ -1,0 +1,22 @@
+MARKET SİMÜLATÖRÜ V4 — ONLINE CO-OP
+===================================
+V3.6 tabanlı, 1–4 kişilik oda sistemi. Oyuncular aynı web adresini açar; hiçbir oyuncunun program kurması veya oyun dosyası indirmesi gerekmez. Online oyun için internet ve çalışan bir sunucu gerekir.
+
+ÜCRETSİZ DENEME YAYINI (GITHUB + RENDER)
+1. ZIP'i bir kere aç. GitHub.com'da yeni bir repository oluştur.
+2. Klasördeki index.html, server.js, package.json ve .gitignore dosyalarını repository'nin köküne yükle. ZIP dosyasını tek başına yükleme.
+3. render.com'da hesap aç, New > Web Service seç. GitHub hesabını bağla ve repository'yi seç.
+4. Language/Runtime: Node; Build Command: npm install; Start Command: npm start; Instance Type: Free. Health Check Path (varsa): /health. Deploy Web Service'e bas.
+5. Render tarafından verilen https://....onrender.com adresi oyun sitesidir. Arkadaşlarınla paylaş.
+6. Herkes aynı adrese girsin. Biriniz adını yazıp Oda oluştur desin, diğerleri 6 haneli kodu yazıp Katıl desin.
+
+Önemli: ücretsiz Render servisi kullanılmadığında uykuya geçebilir ve yeniden başlatma/yeni dağıtım sırasında sunucu diski silinebilir. Oda ve market kaydı bu durumda kaybolabilir. Kalıcı sunucu diski için uygun ücretli plan, DATA_DIR=/var/data (diskin bağlandığı konum) veya ileride harici veritabanı gerekir. Yönetim > Ayarlar'dan JSON yedek alınabilir; bu yedek mevcut sürümde tek oyunculu oyuna geri yüklenebilir, online odaya otomatik geri yüklenmez.
+
+YEREL TEST / SUNUCU SAHİBİ İÇİN (isteğe bağlı)
+Node.js 20+ kurulu bir makinede bu klasörde npm start çalıştır. http://localhost:3000 adresini aç. Aynı yerel ağdaki arkadaşların, sunucunun LAN IP adresi ve 3000 portu ile erişebilir; güvenlik duvarı izinleri gerekebilir. Oyuncular için Node.js gerekmez. Sunucu, varsayılan olarak PORT=3000 dinler. Harici paket bağımlılığı yoktur.
+
+OYUN
+WASD hareket, P fare kilidi, ESC menü, E etkileşim, F taşıma, R döndürme, B inşa, M bilgisayar, Q koli iadesi. Aynı anda 4 oyuncu, en fazla 3 müşteri. Kasa işlemini tek oyuncu yürütür; diğerleri ürün alabilir/taşıyabilir. Ortak para, ürün stoğu, mobilya, müşteriler, kamyon ve gün saati eşitlenir. Oda boşsa gün ilerlemez. Oda sahibi ayrılırsa kalan oyunculardan biri simülasyonu devralır. Uzun bağlantı kaybında yeniden oda koduyla gir. Elde kalan koliler bağlantı kesildiğinde depoya iade edilir (zaman aşımıyla). Menü açıkken online dünya ilerlemeye devam eder.
+
+SINIRLAR
+Arkadaşlar arasında kullanım için prototip; açık dünya oyuncu eşleştirmesi, hesap sistemi, sesli sohbet ve hile koruması yok. İstemci simülasyonu bir oyuncu tarafından yürütülür, sunucu işlemleri sıraya alır. Gecikme veya arka plan sekmesi oyun akışını etkileyebilir. Oda kodunu yalnızca güvendiğin arkadaşlarınla paylaş. Sunucuyu halka açık büyük oyuncu topluluğu için kullanmadan önce güvenlik ve kapasite geliştirmeleri gerekir. Test: 2 Chromium oturumu, yerel API test köprüsü üzerinden oda, pozisyon, satın alma, teslimat, koli, kasa kilidi; 5. oyuncu reddi API üzerinden. İnternet üzerinden yayın, uzun oyun oturumları ve bütün işlemler test edilmedi.
